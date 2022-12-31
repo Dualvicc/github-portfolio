@@ -5,6 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      body {
+          font-family: sans-serif;       
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    </style>
 </head>
 <body>
     <img id="avatar" src="" alt="">
@@ -68,15 +78,12 @@
             // Loop through the data and add a row for each item
             data.forEach(repository => {
               // Create a new row element
-              const row = document.createElement('tr');
-      
+              const row = document.createElement('tr');     
               // Create a cell for the data
               const cell = document.createElement('td');
-              cell.innerText = repository.name;
-      
+              cell.innerText = repository.name;     
               // Add the cell to the row
               row.appendChild(cell);
-      
               // Add the row to the table body
               document.getElementById('tableBody').appendChild(row);
             });
