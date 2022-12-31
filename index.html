@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="avatar" src="" alt="">
+    <h1 id="name">NOMBRE</h1>
+    <p id="bio">BIO</p>
+    <p id="location">LOCATION</p>
+    <p id="email">EMAIL</p>
+    <table id="repositorios">
+        <thead>
+          <tr>
+            <th>Repositorios</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const URL = "https://api.github.com/users/dualvicc"
+
+        const respuesta = fetch(URL).then(
+                (response) => {
+                    const data = response.json().then(
+                        (json) => {
+                            hydrateDOM(json)
+                        }
+                    )
+                }  
+            )
+            
+        function hydrateDOM(json) {
+            const {name,location,bio,avatar_url,email} = json;
+            console.log(name)
+            const nameEl = document.getElementById('name');
+            const locationEl = document.getElementById('location');
+            const bioEl = document.getElementById('bio');
+            const avatarEl = document.getElementById('avatar');
+            const emailEl = document.getElementById('email');
+            nameEl.innerHTML = name;
+            locationEl.innerHTML = location;
+            bioEl.innerHTML = bio;
+            avatarEl.src = avatar_url;
+            emailEl.innerHTML = email;
+        }
+        console.log(json);
+    </script>
+    <script>
+        // Make an HTTP request to the API
+        fetch('https://api.github.com/users/Dualvicc/repos')
+          .then(response => response.json())
+          .then(data => {
+            // Loop through the data and add a row for each item
+            data.forEach(repository => {
+              // Create a new row element
+              const row = document.createElement('tr');
+      
+              // Create a cell for the data
+              const cell = document.createElement('td');
+              cell.innerText = repository.name;
+      
+              // Add the cell to the row
+              row.appendChild(cell);
+      
+              // Add the row to the table body
+              document.getElementById('tableBody').appendChild(row);
+            });
+          });
+      </script>
+</body>
+</html>
